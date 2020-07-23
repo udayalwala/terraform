@@ -1,0 +1,25 @@
+upload a key to the aws and use that for creating resources like ec2 instance 
+---------------------------------------------------------------
+
+create a key from the gitbash
+
+ssh-keygen
+
+Enter file in which to save the key (/c/Users/DELL/.ssh/id_rsa):mynewkey
+
+it will generate the 2 key in current working directory and named as mynewkey.pub (public key) and mynewkey (private key)
+
+use the key for the instance
+------------------------
+
+resource aws_key_pair "mykey"
+{
+key_name="mynewkey"
+public_key="${file("./mynewkey.pub")}"
+}
+resource aws_instance "myinstance"
+{
+depends_on=["aws_key_pair.mykey]
+ami="ami-0d6c336fc1df6d884"
+availability_zone="ap-southeast-1a"
+instance_type="t2.micro"

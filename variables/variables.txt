@@ -1,0 +1,38 @@
+we can pass variables in the run time also..override the existing variables
+
+variable "a"
+{
+}
+variable "b"
+{
+default="1000"
+}
+output "avalue"
+{
+value="${var.a}"
+}
+output "bvalue"
+{
+value="${var.b}"
+}
+
+
+terraform apply -var a=100 -var b=50
+
+output:
+---------
+avalue=100
+bvalue=50
+
+we can pass the file to the terraform instead of passing all the variables on by one
+all the variables are written in a file and extension sould be "tfvar"
+and pass that file to the terraform
+
+syntax:
+---------
+terraform apply -var-file=filename
+
+terraform apply -var-file=varlis.tfvar
+
+
+

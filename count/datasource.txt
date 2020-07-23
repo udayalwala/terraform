@@ -1,0 +1,8 @@
+Data sources allow data to be fetched or computed the data in AWS or any cloud by the terraform
+if you want to read something from cloud environment we use a keyword called "data source"
+
+ex: no of subnets in a vpc
+
+no of availabiilty zones in a region
+
+

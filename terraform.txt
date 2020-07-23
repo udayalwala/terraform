@@ -1,0 +1,204 @@
+terraform: to automate cloud infrastructure or provision of cloud infrastructure
+
+terraform is developed by hashicorp
+
+terraform uses scriptig language called HCL
+
+all terraform scripts ends with .tf
+
+before installing terraform in windows check whether it is installed or not
+
+open cli type terraform --version
+
+install terraform
+========================
+to download the official website is terraform.io
+
+select the version of the terraform let us say terraform_0.11.9
+
+click it, select the zip file for windows
+
+terraform_0.11.9_windows_386.zip  download
+
+unzip it
+
+set the path of the terraform i.e., where this file is physically loacted
+
+go to my computer
+
+propertes --> advanced system settings -->environment variables -->system variables --> path -->
+
+edit -->add path --> C:\Users\DELL\Downloads
+
+
+
+keywords:
+
+provider
+---------
+is a keyword  which tells the terraform which provider is using like aws, azure, gcp,oracle etc
+
+which account is using
+
+
+resources:
+----------
+in the cloud provider you are doing changes like you might be creating instances, vpc, volume etc
+
+datasource:
+----------- 
+some existing infrasture details you want to read it
+
+interpolation:
+--------------
+if you want to read resource attributes 
+
+suppose you created an instance
+
+you want to know the publicIP privteIp, subnetId, availabiltiyzone of the machines etc 
+
+"${}"
+
+remote execution
+-----------------
+
+local execution
+---------------
+
+file
+-----
+
+variables
+-----------
+
+outputs
+--------
+
+terraform init:
+---------------
+provider related plugins are automatically installed
+
+to validate the terraform file
+------------------------------
+terraform validate
+
+to execute the terraform files
+----------------------------
+terraform apply
+
+terraform state file will stores about your infrastructure and configuration.what are the changes done previously..state file contains previous values or configuration 
+
+interpolation:
+-----------------
+ 
+value="${aws_ebs_volume.v1.id}"
+
+resource type
+resource name
+id
+
+file
+------
+is a function in terraform which reads the data from a specific file
+
+how to define parameters in terraform
+-------------------------------------------
+variables
+
+3 types
+-------
+string/number
+lists
+map
+
+by default if you dont mention any type it will take string
+
+retrieve values from a variable 
+-------------------------------
+var.variablename
+
+retrieve values from a resource
+---------------------------------
+resourcetype.resourcename.attributename
+
+1) we can assign default value to a variable
+ type="string"
+default="uday"
+
+2) we can assign array of elements to a variable
+variable "var1"
+{
+type="list"
+default="[1020,30,"udayalwala"]
+}
+
+3) we can print the element in the particular index also
+
+output "any-name-for-output"
+{
+value="${var.variablename[index-position]"
+}
+
+for the above variable position at 3rd index
+-----------------------------------------
+
+output "varinlistvalue"
+{
+value="${var.var1[3]}"
+}
+
+it will print udayalwala
+
+how many elements in the list
+--------------------------------
+
+length
+
+prints no of elements in the list
+
+to print the no of elements in above list
+-----------------------------------------
+
+output "printlenoflist"
+{
+value="${length.(var.var1)}"
+
+you can use multiple providers in the provicer section
+--------------------------------------------------------- 
+provider "aws"
+{
+access_key ="AKIAIFVLSHYWHQ6METYA"
+secret_key ="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"
+region="ap-southeast-1"
+}
+
+provider "aws"
+{
+alias="mumbai"
+access_key ="AKIAIFVLSHYWHQ6METYA"
+secret_key ="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"
+region="ap-south-1a"
+}
+
+
+when you are creating any resource other than default region you must provide the provider details (provider section has region)..alias name be anything.
+
+ex:    
+
+resource aws_instance "myinstance"
+{
+provider="aws.mumbai"
+ami="ami-0447a12f28fddb066"
+instance-type="t2.micro"
+}
+       
+in aws cloudformation if multiple resources are creating an if any one of the resource creation is failed then aws cloudformation rollback and delete the entire resources in the stack
+
+but in terraform there is no rollback option if there are multiple resources creating and any one of the resource creation failed the created resources willnot rollback to previous state or delete, we need to delete manually
+
+to create the resources which depends on other resource we use the depends_on option
+
+
+
+
+

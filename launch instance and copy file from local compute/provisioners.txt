@@ -1,0 +1,12 @@
+provisioners section will be executed at the time of instance creation
+
+
+file provisoner: copy file from loacal machine to the remote machine
+
+remote-execution: after lauching resource(instance) it will execute commands on remote resource
+
+local-execution: after resource creation some commands will be executed on local machine
+
+connection: connection should be established between local machine to launched resource
+
+
